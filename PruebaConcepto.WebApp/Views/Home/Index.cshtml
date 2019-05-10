@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "MVC Grid";
+}
+
+<h2>MVC Grid</h2>
+
+@*<div class="panel panel-default">
+    <div class="panel-body">
+        @Html.AjaxGrid(Url.Action("IndexGrid"))
+    </div>
+</div>*@
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        @Html.AjaxGrid(Url.Action("IndexGrid_"))
+        <div class="col-lg-12">
+            <button type='button' class='btn_edit btn btn-primary hidden' title="Editar usuario"><i class='fas fa-user-edit'></i></button>
+            <button type='button' class='btn_asociate btn btn-secondary hidden' title="Agregar Roles"><i class='fas fa-user-cog'></i></button>
+        </div>
+    </div>
+</div>
+
+
+<div class="panel">
+        <div class="panel-body">
+            @Html.AjaxGrid(Url.Action("LoginUser"))
+        </div>
+</div>
+
+@section styles {
+    <link href="~/Content/MvcGrid.css" rel="stylesheet" />
+}
+
+@section scripts{
+    <script src="~/Scripts/mvcGrid.js"></script>
+}

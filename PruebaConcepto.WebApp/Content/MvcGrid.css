@@ -1,0 +1,13 @@
+﻿.hidden {
+    display:none;
+}
+
+.selected {
+    background-color: gray;
+    color: white;
+}
+
+.isNotEditable {
+    background-color: crimson;
+    color: white;
+}

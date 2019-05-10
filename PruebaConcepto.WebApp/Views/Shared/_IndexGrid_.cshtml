@@ -1,0 +1,26 @@
+﻿@model IEnumerable<PruebaConcepto.WebApp.Models.UserModel>
+
+@(  Html
+        .Grid(Model)
+        .Build(columns =>
+        {
+            columns.Add(model => model.Id).Css("hidden");
+            columns.Add(model => model.IsEditable).Css("hidden");
+            columns.Add(model => model.Name).Titled("Nombre");
+            columns.Add(model => model.LastName).Titled("Apellido");
+            columns.Add(model => model.Email).Titled("Correo");
+
+            columns.Add(model => model.Phone).Titled("Phone");
+        })
+        .Empty("No data found")
+        .Id("ajax-grid")
+        .Pageable(pager =>
+        {
+            pager.PagesToDisplay = 2;
+            pager.RowsPerPage = 2;
+        })
+        .Filterable()
+        .Sortable()
+        .RowCss(model => !model.IsEditable ? "isNotEditable" :  "")
+)
+

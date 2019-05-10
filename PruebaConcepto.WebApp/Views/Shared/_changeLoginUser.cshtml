@@ -1,0 +1,12 @@
+﻿<div class="form-group">
+    @using (Html.BeginForm("loginUser", "home", FormMethod.Post))
+    {
+        <div class="col-lg-3">
+            <label>Seleccione el usuario a loguear</label>
+        </div>
+        <div class="col-lg-9">
+            @Html.DropDownList("UserLogin", (IEnumerable<SelectListItem>)ViewBag.UserList, new { @Class = "form-control" })
+        </div>
+        <button type="submit" class="btn btn-success">Login user</button>
+    }
+</div>

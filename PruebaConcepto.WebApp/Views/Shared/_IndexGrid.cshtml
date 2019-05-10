@@ -1,0 +1,35 @@
+﻿@model IEnumerable<PruebaConcepto.WebApp.Models.UserModel>
+
+@(  Html
+        .Grid(Model)
+        .Build(columns =>
+        {
+            columns.Add(model => model.Name).Titled("Nombre");
+            columns.Add(model => model.LastName).Titled("Apellido");
+            columns.Add(model => model.Email).Titled("Correo");
+
+            columns.Add(model => model.Phone).Titled("Phone");
+            columns.Add()
+            .Titled("Editar")
+            .RenderedAs(model => new HtmlString (
+                        "<form action='/home/Editar/"+ model.Id +"' method='GET'>" +
+                         "<button type='submit' class='btn btn-primary'><i class='fas fa-user-edit'></i></button>" +
+                        "</form>")
+            );
+            columns.Add()
+            .Titled("Asignar Roles")
+            .RenderedAs(model => new HtmlString(
+                         "<button type='button' class='btn btn-secondary' ><i class='fas fa-user-cog'></i></button>")
+            );
+        })
+        .Empty("No data found")
+        .Id("my-ajax-grid")
+        .Pageable(pager =>
+        {
+            pager.PagesToDisplay = 2;
+            pager.RowsPerPage = 2;
+        })
+        .Filterable()
+        .Sortable()
+)
+
