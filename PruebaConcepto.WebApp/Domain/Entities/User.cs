@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -35,13 +36,13 @@ namespace PruebaConcepto.WebApp.Domain.Entities
             addPermissions(permissions);
         }
 
-        public int Id { get; private set; }
+        public int Id { get; set; }
 
         public string Name { get; private set; }
 
         public string LastName { get; private set; }
 
-        public string Email { get; private set; }
+        public string Email { get; set; }
 
         public string Phone { get; private set; }
         

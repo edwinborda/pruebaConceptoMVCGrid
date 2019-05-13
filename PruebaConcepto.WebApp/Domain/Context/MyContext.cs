@@ -9,7 +9,8 @@ namespace PruebaConcepto.WebApp.Domain.Context
 {
     public class MyContext : DbContext
     {
-        public MyContext():base("name=connString")
+        public MyContext()
+            :base("name=connString")
         {
 
         }
@@ -17,5 +18,11 @@ namespace PruebaConcepto.WebApp.Domain.Context
         public DbSet<User> User { get; set; }
 
         public DbSet<Permission> Permission { get; set; }
+
+        public DbSet<Department> Department { get; set; }
+
+        public DbSet<City> City { get; set; }
+
+        public DbSet<Neighboorhood> Neighboorhood { get; set; }
     }
 }

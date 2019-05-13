@@ -79,9 +79,9 @@ namespace PruebaConcepto.WebApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult LoginUser(string UserLogin)
+        public ActionResult LoginUser(int UserLogin)
         { 
-            var user = new userServices().getAllUser("Permissions").FirstOrDefault(p=>p.Id == Convert.ToInt32(UserLogin));
+            var user = new userServices().getAllUser("Permissions").FirstOrDefault(p=>p.Id == UserLogin);
             TempData["Permissions"] = user.Permissions;
             
 
@@ -94,6 +94,48 @@ namespace PruebaConcepto.WebApp.Controllers
             var stringPermission = JsonConvert.SerializeObject((IEnumerable<Permission>)TempData["Permissions"]);
             TempData.Keep("Permission");
             return Json(stringPermission, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult Dropdown()
+        {
+            ViewBag.Deparments = new cityServices().getDepartments().Select(p => {
+                return new SelectListItem()
+                {
+                    Text = p.Name,
+                    Value = p.Id.ToString()
+                };
+            });
+
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult GetCities(int id)
+        {
+            var cities = new cityServices().getCities(id).Select(p => {
+                return new SelectListItem()
+                {
+                    Text = p.Name,
+                    Value = p.Id.ToString()
+                };
+            });
+
+            return Json(cities, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult GetNeighboorhoods(int id)
+        {
+            var neighboorhoods = new cityServices().getNeighboorhood(id).Select(p => {
+                return new SelectListItem()
+                {
+                    Text = p.Name,
+                    Value = p.Id.ToString()
+                };
+            });
+
+            return Json(neighboorhoods, JsonRequestBehavior.AllowGet);
         }
 
         private UserModel toUserModel(User entity)

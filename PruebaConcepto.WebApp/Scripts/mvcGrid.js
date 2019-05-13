@@ -1,5 +1,10 @@
 ﻿document.addEventListener('DOMContentLoaded', () => {
     var grid = document.querySelector('.mvc-grid');
+    new MvcGrid(grid, {
+        reload: true,
+        reloadStarted: console.log('reload Started')
+    });
+    
     const url = '/home/getPermission';
     const Http = new XMLHttpRequest();
     var btn_edit = document.querySelector('.btn_edit');

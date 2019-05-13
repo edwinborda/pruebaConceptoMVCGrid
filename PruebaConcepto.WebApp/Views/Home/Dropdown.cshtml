@@ -1,0 +1,40 @@
+﻿@using Mvc.CascadeDropDown
+@model PruebaConcepto.WebApp.Models.DemographicModel
+@{
+    ViewBag.Title = "Dropdown";
+}
+
+<h2>Prueba de concepto Dropdown cascade</h2>
+
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="form-horizontal">
+            <div class="col-lg-3">
+                <label>Departamentos</label>
+            </div>
+            <div class="col-lg-9">
+                @Html.DropDownListFor(m => m.SelectedDepartment, (IEnumerable<SelectListItem>)ViewBag.Deparments, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-horizontal">
+            <div class="col-lg-3">
+                <label>Ciudades</label>
+            </div>
+            <div class="col-lg-9">
+                @Html.CascadingDropDownListFor(m => m.SelectedCities, m => m.SelectedDepartment,
+                            Url.Action("GetCities", "Home"), "id", "Por favor seleccione ciudad", true, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-horizontal">
+            <div class="col-lg-3">
+                <label>Barrios</label>
+            </div>
+            <div class="col-lg-9">
+                @Html.CascadingDropDownListFor(m => m.SelectedNeigh, m => m.SelectedCities,
+                            Url.Action("GetNeighboorhoods", "Home"), "id", "Por favor seleccione un barrio", true, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+</div>
+

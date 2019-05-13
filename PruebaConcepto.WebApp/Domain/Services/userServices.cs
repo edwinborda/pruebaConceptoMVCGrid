@@ -17,7 +17,8 @@ namespace PruebaConcepto.WebApp.Domain.Services
 
         public IEnumerable<User> getAllUser(string include = null)
         {
-            return string.IsNullOrEmpty(include) ? myContext.User.ToList(): myContext.User.Include(include).ToList();
+            return new List<User>();
+            //return string.IsNullOrEmpty(include) ? myContext.User.ToList(): myContext.User.Include(include).ToList();
         }
 
         public bool addUser(User entity)
