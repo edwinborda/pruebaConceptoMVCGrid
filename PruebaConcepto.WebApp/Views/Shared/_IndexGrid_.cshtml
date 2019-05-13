@@ -9,8 +9,8 @@
             columns.Add(model => model.Name).Titled("Nombre");
             columns.Add(model => model.LastName).Titled("Apellido");
             columns.Add(model => model.Email).Titled("Correo");
-
-            columns.Add(model => model.Phone).Titled("Phone");
+            columns.Add(model => model.Phone).Titled("Teléfono");
+            columns.Add(model => model.UserName).Titled("Usuario");
         })
         .Empty("No data found")
         .Id("ajax-grid")

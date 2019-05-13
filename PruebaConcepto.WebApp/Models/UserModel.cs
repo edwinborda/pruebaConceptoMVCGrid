@@ -8,10 +8,14 @@ namespace PruebaConcepto.WebApp.Models
 {
     public class UserModel
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         [Display(Name="Nombre")]
         public string Name { get; set; }
+
+        public string UserName { get; set; }
+
+        public string Password { get; set; }
 
         [Display(Name = "Apellido")]
         public string LastName { get; set; }

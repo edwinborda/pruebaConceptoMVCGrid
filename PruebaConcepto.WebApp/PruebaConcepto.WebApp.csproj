@@ -52,6 +52,9 @@
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.2\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.2\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
     </Reference>
@@ -162,13 +165,12 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Domain\Context\AccountDbContext.cs" />
     <Compile Include="Domain\Context\MyContext.cs" />
     <Compile Include="Domain\Entities\City.cs" />
     <Compile Include="Domain\Entities\Department.cs" />
     <Compile Include="Domain\Entities\Neighboorhood.cs" />
     <Compile Include="Domain\Entities\Permission.cs" />
-    <Compile Include="Domain\Entities\User.cs" />
+    <Compile Include="Domain\Entities\Users.cs" />
     <Compile Include="Domain\Services\cityServices.cs" />
     <Compile Include="Domain\Services\userServices.cs" />
     <Compile Include="Global.asax.cs">
@@ -193,6 +195,10 @@
     <Compile Include="Migrations\201905131845584_addNeighborhoodTable.cs" />
     <Compile Include="Migrations\201905131845584_addNeighborhoodTable.Designer.cs">
       <DependentUpon>201905131845584_addNeighborhoodTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905132029487_AddIdentity.cs" />
+    <Compile Include="Migrations\201905132029487_AddIdentity.Designer.cs">
+      <DependentUpon>201905132029487_AddIdentity.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DemographicModel.cs" />
@@ -234,6 +240,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905131845584_addNeighborhoodTable.resx">
       <DependentUpon>201905131845584_addNeighborhoodTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905132029487_AddIdentity.resx">
+      <DependentUpon>201905132029487_AddIdentity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

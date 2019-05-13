@@ -36,16 +36,6 @@ namespace PruebaConcepto.WebApp.Migrations
             var chiquin = new City("Chinquinquira", "", departmentsBoy);
             var raquira = new City("Raquira", "", departmentsBoy);
             var simijaca = new City("Simijaca", "", departmentsBoy);
-
-
-            context.Permission.AddOrUpdate(it => it.Name, permisoAct);
-            context.Permission.AddOrUpdate(it => it.Name, permisoCrearRoles);
-            context.User.AddOrUpdate(it => it.Email,
-                new User("Edwin", "Borda", "edwin.borda@outlook.com", "3202660453",permisoAct, permisoCrearRoles),
-                new User("Jose", "Hernandez", "joseh@outlook.com", "0315446789", permisoAct, permisoCrearRoles),
-                new User("Pedro", "Perez", "pedrop@outlook.com", "3107867876", permisoAct, permisoCrearRoles),
-                new User("Armando", "Pelaez", "armpelaez@outlook.com", "3107625676", permisoCrearRoles));
-
             context.Department.AddOrUpdate(it => it.Name, departmentsCundi, departmentsAnti, departmentsBoy);
             context.City.AddOrUpdate(it => it.Name,
                 bogota,
@@ -75,6 +65,16 @@ namespace PruebaConcepto.WebApp.Migrations
                 new Neighboorhood("El nogal", medellin),
                 new Neighboorhood("Laureles", medellin)
             );
+
+            context.Permission.AddOrUpdate(it => it.Name, permisoAct);
+            context.Permission.AddOrUpdate(it => it.Name, permisoCrearRoles);
+            context.Users.AddOrUpdate(it => it.Email,
+                new Users("eborda","12345", "Edwin", "Borda", "edwin.borda@outlook.com", "3202660453", permisoAct, permisoCrearRoles),
+                new Users("joseh", "12345", "Jose", "Hernandez",  "joseh@outlook.com", "0315446789", permisoAct, permisoCrearRoles),
+                new Users("pedrop", "12345","Pedro", "Perez", "pedrop@outlook.com", "3107867876", permisoAct, permisoCrearRoles),
+                new Users("armpelaez", "12345", "Armando", "Pelaez",  "armpelaez@outlook.com", "3107625676", permisoCrearRoles));
+
+
         }
     }
 }

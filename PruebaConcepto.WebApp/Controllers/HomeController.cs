@@ -36,7 +36,7 @@ namespace PruebaConcepto.WebApp.Controllers
         }
 
         [HttpGet]
-        public ActionResult Editar(int id)
+        public ActionResult Editar(string id)
         {
             var item = new userServices().getAllUser()
                 .Select(toUserModel).FirstOrDefault(p=>p.Id == id);
@@ -79,7 +79,7 @@ namespace PruebaConcepto.WebApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult LoginUser(int UserLogin)
+        public ActionResult LoginUser(string UserLogin)
         { 
             var user = new userServices().getAllUser("Permissions").FirstOrDefault(p=>p.Id == UserLogin);
             TempData["Permissions"] = user.Permissions;
@@ -138,7 +138,7 @@ namespace PruebaConcepto.WebApp.Controllers
             return Json(neighboorhoods, JsonRequestBehavior.AllowGet);
         }
 
-        private UserModel toUserModel(User entity)
+        private UserModel toUserModel(Users entity)
         {
             return new UserModel()
             {
@@ -146,14 +146,15 @@ namespace PruebaConcepto.WebApp.Controllers
                 Name = entity.Name,
                 LastName = entity.LastName,
                 Email = entity.Email,
-                Phone = entity.Phone,
-                IsEditable = entity.IsEditable
+                Phone = entity.PhoneNumber,
+                IsEditable = entity.IsEditable,
+                UserName = entity.UserName
             };
         }
 
-        private User toUser(UserModel model)
+        private Users toUser(UserModel model)
         {
-            return new User(model.Name, model.LastName, model.Email, model.Phone, model.Id);
+            return new Users(model.UserName, model.Password, model.Name, model.LastName, model.Email, model.Phone, model.Id.ToString());
         }
     }
 }

@@ -29,6 +29,6 @@ namespace PruebaConcepto.WebApp.Domain.Entities
         
         [JsonIgnore]
         [InverseProperty("Permissions")]
-        public virtual ICollection<User> Users { get; private set; }
+        public virtual ICollection<Users> Users { get; private set; }
     }
 }

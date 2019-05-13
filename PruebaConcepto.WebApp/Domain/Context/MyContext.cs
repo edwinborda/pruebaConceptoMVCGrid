@@ -1,4 +1,5 @@
-﻿using PruebaConcepto.WebApp.Domain.Entities;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using PruebaConcepto.WebApp.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -7,15 +8,18 @@ using System.Web;
 
 namespace PruebaConcepto.WebApp.Domain.Context
 {
-    public class MyContext : DbContext
+    public class MyContext : IdentityDbContext<Users>
     {
         public MyContext()
-            :base("name=connString")
+            :base("name=connString", throwIfV1Schema: false)
         {
 
         }
 
-        public DbSet<User> User { get; set; }
+        public static MyContext Create()
+        {
+            return new MyContext();
+        }
 
         public DbSet<Permission> Permission { get; set; }
 
@@ -24,5 +28,11 @@ namespace PruebaConcepto.WebApp.Domain.Context
         public DbSet<City> City { get; set; }
 
         public DbSet<Neighboorhood> Neighboorhood { get; set; }
+
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
