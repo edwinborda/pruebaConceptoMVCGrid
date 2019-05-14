@@ -11,7 +11,7 @@ using System.Web;
 
 namespace PruebaConcepto.WebApp.Domain.Services
 {
-    public class userServices: IUserStore<IdentityUser>
+    public class userServices: IUserStore<Users>
     {
         private readonly MyContext myContext;
         public userServices()
@@ -33,34 +33,34 @@ namespace PruebaConcepto.WebApp.Domain.Services
 
         public bool editUser(Users entity)
         {
-            myContext.Entry(entity).State = System.Data.Entity.EntityState.Modified;
+            myContext.Entry(entity).State = EntityState.Modified;
 
             return myContext.SaveChanges() > 1;
         }
 
-        public Task CreateAsync(IdentityUser user)
+        public Task CreateAsync(Users user)
         {
             throw new NotImplementedException();
         }
 
-        public Task UpdateAsync(IdentityUser user)
+        public Task UpdateAsync(Users user)
         {
             throw new NotImplementedException();
         }
 
-        public Task DeleteAsync(IdentityUser user)
+        public Task DeleteAsync(Users user)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IdentityUser> FindByIdAsync(string userId)
+        public Task<Users> FindByIdAsync(string userId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IdentityUser> FindByNameAsync(string userName)
+        public Task<Users> FindByNameAsync(string userName)
         {
-            throw new NotImplementedException();
+            return Task.FromResult<Users>(myContext.Users.FirstOrDefault(it => it.UserName == userName));
         }
 
         public void Dispose()

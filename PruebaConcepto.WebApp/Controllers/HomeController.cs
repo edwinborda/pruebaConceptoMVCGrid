@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Owin.Security.Authorization.Mvc;
+using Newtonsoft.Json;
 using PruebaConcepto.WebApp.Domain.Entities;
 using PruebaConcepto.WebApp.Domain.Services;
 using PruebaConcepto.WebApp.Models;
@@ -12,6 +13,7 @@ namespace PruebaConcepto.WebApp.Controllers
 {
     public class HomeController : Controller
     {
+        [Authorize]
         // GET: Home
         [HttpGet]
         public ActionResult Index()
@@ -19,6 +21,7 @@ namespace PruebaConcepto.WebApp.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpGet]
         public PartialViewResult IndexGrid()
         {
@@ -27,6 +30,7 @@ namespace PruebaConcepto.WebApp.Controllers
             return PartialView("_IndexGrid", list);
         }
 
+        [Authorize]
         [HttpGet]
         public PartialViewResult IndexGrid_()
         {
@@ -35,6 +39,7 @@ namespace PruebaConcepto.WebApp.Controllers
             return PartialView("_IndexGrid_", list);
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult Editar(string id)
         {
@@ -47,6 +52,7 @@ namespace PruebaConcepto.WebApp.Controllers
             return View(item);
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult Editar(UserModel model)
         {
@@ -61,6 +67,7 @@ namespace PruebaConcepto.WebApp.Controllers
             return View(model);
         }
 
+        [Authorize]
         [HttpGet]
         public PartialViewResult LoginUser()
         {
@@ -78,6 +85,7 @@ namespace PruebaConcepto.WebApp.Controllers
             return PartialView("_changeLoginUser");
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult LoginUser(string UserLogin)
         { 
@@ -88,6 +96,7 @@ namespace PruebaConcepto.WebApp.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult getPermission()
         {
@@ -96,6 +105,7 @@ namespace PruebaConcepto.WebApp.Controllers
             return Json(stringPermission, JsonRequestBehavior.AllowGet);
         }
 
+        [ResourceAuthorize(Policy = "IsEditable")]
         [HttpGet]
         public ActionResult Dropdown()
         {
@@ -110,6 +120,7 @@ namespace PruebaConcepto.WebApp.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult GetCities(int id)
         {
@@ -124,6 +135,7 @@ namespace PruebaConcepto.WebApp.Controllers
             return Json(cities, JsonRequestBehavior.AllowGet);
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult GetNeighboorhoods(int id)
         {
