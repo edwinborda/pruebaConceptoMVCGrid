@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace PruebaConcepto.WebApp.Models
+namespace PruebaConcepto.ViewModels
 {
     public class LoginViewModel
     {

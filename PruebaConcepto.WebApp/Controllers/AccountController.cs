@@ -1,12 +1,8 @@
 ﻿using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using PruebaConcepto.WebApp.Domain.Entities;
 using PruebaConcepto.WebApp.Domain.Services;
-using PruebaConcepto.WebApp.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using PruebaConcepto.ViewModels;
 using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;

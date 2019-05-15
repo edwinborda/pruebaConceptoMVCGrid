@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PruebaConcepto.WebApp.App_Start;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,6 +14,7 @@ namespace PruebaConcepto.WebApp
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            AutofacConfig.config();
         }
     }
 }

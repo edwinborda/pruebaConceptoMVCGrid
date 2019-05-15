@@ -24,6 +24,11 @@ namespace PruebaConcepto.WebApp.Domain.Entities
             LastName = lastname;
             Email = email;
             PhoneNumber = phone;
+            TwoFactorEnabled = false;
+            EmailConfirmed = false;
+            PhoneNumberConfirmed = false;
+            AccessFailedCount = 0;
+            LockoutEnabled = true;
             addPermissions(permissions);
 
             if (!string.IsNullOrEmpty(id))

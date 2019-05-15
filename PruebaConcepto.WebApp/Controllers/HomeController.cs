@@ -1,11 +1,15 @@
-﻿using Microsoft.Owin.Security.Authorization.Mvc;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security.Authorization.Mvc;
 using Newtonsoft.Json;
+using PruebaConcepto.Validations;
 using PruebaConcepto.WebApp.Domain.Entities;
 using PruebaConcepto.WebApp.Domain.Services;
-using PruebaConcepto.WebApp.Models;
+using PruebaConcepto.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 
@@ -13,8 +17,15 @@ namespace PruebaConcepto.WebApp.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly UserManager<Users> usermanager;
+        private readonly IValidate<UserModel> validator;
+        public HomeController(IValidate<UserModel> validator)
+        {
+            usermanager = new UserManager<Users>(new userServices());
+            this.validator = validator;
+        }
+
         [Authorize]
-        // GET: Home
         [HttpGet]
         public ActionResult Index()
         {
@@ -56,9 +67,13 @@ namespace PruebaConcepto.WebApp.Controllers
         [HttpPost]
         public ActionResult Editar(UserModel model)
         {
-            if (!ModelState.IsValid)
+            var errors = string.Empty;
+            if (!validator.validate(model, out errors))
+            {
+                ViewBag.Errors = errors.Replace(",","<br/>");
                 return View(model);
-
+            }
+            
             var result = new userServices().editUser(toUser(model));
 
             if (result)
@@ -100,8 +115,11 @@ namespace PruebaConcepto.WebApp.Controllers
         [HttpGet]
         public ActionResult getPermission()
         {
-            var stringPermission = JsonConvert.SerializeObject((IEnumerable<Permission>)TempData["Permissions"]);
-            TempData.Keep("Permission");
+            var identity = (ClaimsPrincipal)Thread.CurrentPrincipal;
+            var username = identity.Claims.FirstOrDefault(it=> it.Type == ClaimTypes.NameIdentifier).Value;
+            var permissions = new userServices().getAllUser("Permissions").FirstOrDefault(p => p.UserName == username)?.Permissions;
+            var stringPermission = JsonConvert.SerializeObject((IEnumerable<Permission>)permissions);
+            
             return Json(stringPermission, JsonRequestBehavior.AllowGet);
         }
 

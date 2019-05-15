@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace PruebaConcepto.WebApp.Models
+namespace PruebaConcepto.ViewModels
 {
     public class DemographicModel
     {
