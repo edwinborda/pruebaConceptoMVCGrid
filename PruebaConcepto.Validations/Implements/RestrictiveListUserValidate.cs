@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PruebaConcepto.Validations.Implements
 {
-    public class RestrictiveListUserValidate : GenericValidate<UserModel>
+    public class RestrictiveListUserValidate : AbstractValidator<UserModel>, IGenericValidate<UserModel>
     {
         public RestrictiveListUserValidate()
         {
@@ -29,11 +29,11 @@ namespace PruebaConcepto.Validations.Implements
             return !RestrictiveList.Any(it => it == document.ToString());
         }
 
-        public override bool validate(UserModel model, out string errors)
+        public bool validating(UserModel model, out string errors)
         {
             var result = Validate(model);
             var isValid = result.IsValid;
-            errors = string.Join(",", result.Errors);
+            errors = string.Join("-", result.Errors);
 
             return result.IsValid;
         }

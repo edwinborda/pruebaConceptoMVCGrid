@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PruebaConcepto.Validations.Implements
 {
-    public partial class FormUserValidate : GenericValidate<UserModel>
+    public class FormUserValidate : AbstractValidator<UserModel>, IGenericValidate<UserModel>
     {
         private readonly RestClient clientZero;
         private readonly RestClient clientServi;
@@ -25,18 +25,18 @@ namespace PruebaConcepto.Validations.Implements
                 return IsAddressValidated(Address, m.City);
             }).WithMessage("Direccion no georeferenciada!!!!");
         }
-        
+
         private bool IsEmailValidated(string email)
         {
-                var request = new RestRequest("/validate", Method.GET);
-                request.AddParameter("api_key", Z_PRIVATE_KEY);
-                request.AddParameter("email", email);
-                request.AddParameter("ip_address", string.Empty);
+            var request = new RestRequest("/validate", Method.GET);
+            request.AddParameter("api_key", Z_PRIVATE_KEY);
+            request.AddParameter("email", email);
+            request.AddParameter("ip_address", string.Empty);
 
-                IRestResponse response = clientZero.Execute(request);
-                var content = JsonConvert.DeserializeObject<Dictionary<string, string>>(response.Content);
-            
-                return content["status"] == "valid";
+            IRestResponse response = clientZero.Execute(request);
+            var content = JsonConvert.DeserializeObject<Dictionary<string, string>>(response.Content);
+
+            return content["status"] == "valid";
         }
 
         private bool IsAddressValidated(string address, string city)
@@ -54,14 +54,14 @@ namespace PruebaConcepto.Validations.Implements
             IRestResponse response = clientServi.Execute(request_);
             var content = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(response.Content);
 
-            return content["data"]["estado"]?.Value?.IndexOfAny(new [] { 'A', 'B' }) > 1;
+            return content["data"]["estado"]?.Value?.IndexOfAny(new[] { 'A', 'B' }) > 1;
         }
 
-        public override bool validate(UserModel model, out string errors)
+        public bool validating(UserModel model, out string errors)
         {
             var result = Validate(model);
             var isValid = result.IsValid;
-            errors = string.Join(",",result.Errors);
+            errors = string.Join(",", result.Errors);
 
             return result.IsValid;
         }

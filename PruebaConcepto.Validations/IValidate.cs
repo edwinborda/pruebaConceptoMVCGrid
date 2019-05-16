@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using PruebaConcepto.Validations.Implements;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace PruebaConcepto.Validations
 {
     public interface IValidate<TModel> where TModel : class
     {
-        bool validate(TModel model, out string errors);
+        bool RunValidate(TModel model, out string errors);
     }
 }

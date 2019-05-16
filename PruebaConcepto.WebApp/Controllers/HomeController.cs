@@ -55,7 +55,7 @@ namespace PruebaConcepto.WebApp.Controllers
         public ActionResult Editar(string id)
         {
             var item = new userServices().getAllUser()
-                .Select(toUserModel).FirstOrDefault(p=>p.Id == id);
+                .Select(toUserModel).FirstOrDefault(p => p.Id == id);
 
             if (item == null)
                 return RedirectToAction("Index");
@@ -67,15 +67,13 @@ namespace PruebaConcepto.WebApp.Controllers
         [HttpPost]
         public ActionResult Editar(UserModel model)
         {
-            var errors = string.Empty;
-            if (!validator.validate(model, out errors))
+            if (!validator.RunValidate(model, out var errors))
             {
-                ViewBag.Errors = errors.Replace(",","<br/>");
+                ViewBag.Errors = errors.Replace("-", @"\n");
                 return View(model);
             }
-            
-            var result = new userServices().editUser(toUser(model));
 
+            var result = new userServices().editUser(toUser(model));
             if (result)
                 return new HttpStatusCodeResult(500);
 
@@ -95,7 +93,7 @@ namespace PruebaConcepto.WebApp.Controllers
                     Value = p.Id.ToString()
                 };
             });
-            
+
 
             return PartialView("_changeLoginUser");
         }
@@ -103,10 +101,10 @@ namespace PruebaConcepto.WebApp.Controllers
         [Authorize]
         [HttpPost]
         public ActionResult LoginUser(string UserLogin)
-        { 
-            var user = new userServices().getAllUser("Permissions").FirstOrDefault(p=>p.Id == UserLogin);
+        {
+            var user = new userServices().getAllUser("Permissions").FirstOrDefault(p => p.Id == UserLogin);
             TempData["Permissions"] = user.Permissions;
-            
+
 
             return RedirectToAction("Index");
         }
@@ -116,10 +114,10 @@ namespace PruebaConcepto.WebApp.Controllers
         public ActionResult getPermission()
         {
             var identity = (ClaimsPrincipal)Thread.CurrentPrincipal;
-            var username = identity.Claims.FirstOrDefault(it=> it.Type == ClaimTypes.NameIdentifier).Value;
+            var username = identity.Claims.FirstOrDefault(it => it.Type == ClaimTypes.NameIdentifier).Value;
             var permissions = new userServices().getAllUser("Permissions").FirstOrDefault(p => p.UserName == username)?.Permissions;
             var stringPermission = JsonConvert.SerializeObject((IEnumerable<Permission>)permissions);
-            
+
             return Json(stringPermission, JsonRequestBehavior.AllowGet);
         }
 
